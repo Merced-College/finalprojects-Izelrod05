@@ -20,7 +20,7 @@ public class Main{
         Player player = new Player();
         List<Song> allSongs = new ArrayList<>();
 
-        // Add some default songs
+        //  some default songs
         Song s1 = new Song("Lose Yourself", "Eminem", "Hip-Hop");
         Song s2 = new Song("Bohemian Rhapsody", "Queen", "Rock");
         Song s3 = new Song("Yesterday", "The Beatles", "Pop");
@@ -34,12 +34,79 @@ public class Main{
             allSongs.add(s);
         }
 
-        
+         // Interactive Menu
+        while (true) {
+            System.out.println("\n==== TerminalTune Menu ====");
+            System.out.println("1. Add a new song");
+            System.out.println("2. View all songs");
+            System.out.println("3. Add song to playlist");
+            System.out.println("4. Show playlist");
+            System.out.println("5. Play next song");
+            System.out.println("6. Show playback history");
+            System.out.println("7. Recommend songs by genre");
+            System.out.println("8. Exit");
+            System.out.print("Choose an option (1–8): ");
 
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
 
+            switch (choice) {
+                case 1 -> {
+                    System.out.print("Enter song title: ");
+                    String title = scanner.nextLine();
+                    System.out.print("Enter artist: ");
+                    String artist = scanner.nextLine();
+                    System.out.print("Enter genre: ");
+                    String genre = scanner.nextLine();
 
-
-        
-
+                    Song newSong = new Song(title, artist, genre);
+                    library.addSong(newSong);
+                    allSongs.add(newSong);
+                    System.out.println("Song added to library.");
+                }
+                case 2 -> {
+                    System.out.println("--- All Songs in Library ---");
+                    library.showAllSongs();
+                }
+                case 3 -> {
+                    System.out.print("Enter title of song to add to playlist: ");
+                    String title = scanner.nextLine();
+                    Optional<Song> song = allSongs.stream()
+                            .filter(s -> s.getTitle().equalsIgnoreCase(title))
+                            .findFirst();
+                    if (song.isPresent()) {
+                        playlist.addSong(song.get());
+                        player.addToQueue(song.get());
+                        System.out.println("Song added to playlist and queue.");
+                    } else {
+                        System.out.println("Song not found.");
+                    }
+                }
+                case 4 -> {
+                    System.out.println("--- Playlist ---");
+                    playlist.display();
+                }
+                case 5 -> {
+                    player.playNext();
+                }
+                case 6 -> {
+                    player.showHistory();
+                }
+                case 7 -> {
+                    System.out.print("Enter genre: ");
+                    String genre = scanner.nextLine();
+                    System.out.print("How many recommendations? ");
+                    int count = scanner.nextInt();
+                    scanner.nextLine(); // consume newline
+                    GenreRecommend.recommend(allSongs, genre, count);
+                }
+                case 8 -> {
+                    System.out.println("Goodbye!");
+                    scanner.close();
+                    return;
+                }
+                default -> System.out.println("Invalid choice. Try again."); 
+            }
+        }
     }
 }
