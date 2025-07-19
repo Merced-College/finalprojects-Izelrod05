@@ -1,4 +1,5 @@
 import java.util.*;
+//recommends song from list based on recursion
 public class GenreRecommend{
 
     public static void recommend(List<Song> songs, String genre, int count){
@@ -6,6 +7,7 @@ public class GenreRecommend{
         System.out.println("Recomendations for genre: " + genre);
         recommendRecursive(songs, genre, count, 0);
     }
+    //recursive mthod that prints up to count
     private static void recommendRecursive(List<Song> songs, String genre, int count, int index){
         if(count == 0 || index >= songs.size())return;
         Song current = songs.get(index);

@@ -1,3 +1,4 @@
+//creates simple linked list
 public class Playlist{
     private static class Node {
         Song song;
@@ -7,8 +8,9 @@ public class Playlist{
             this.song = song;
         }
     }
-    private Node head;
+    private Node head;// start of playlist
 
+    //adds song to end of playlist
     public void addSong(Song song){
 
         Node newNode = new Node(song);
@@ -22,6 +24,7 @@ public class Playlist{
             current.next =newNode;
         }
     }
+    //shows all playlist songs
     public void display(){
         Node current = head;
         while (current != null) {

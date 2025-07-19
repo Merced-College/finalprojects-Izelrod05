@@ -1,8 +1,8 @@
 import java.util.*;
 
 public class Player{
-    private Stack<Song> history = new Stack<>();
-    private Queue<Song> queue = new LinkedList<>();
+    private Stack<Song> history = new Stack<>(); //tracks songs that have been played
+    private Queue<Song> queue = new LinkedList<>(); //holds songs to be played next
 
     public void addToQueue(Song song){
         queue.add(song);
@@ -10,7 +10,7 @@ public class Player{
 
     public void playNext(){
         if(!queue.isEmpty()){
-            Song next =queue.poll();
+            Song next =queue.poll();        //gets next song
             history.push(next);
             System.out.println("Playing: " + next);
         }else{
@@ -18,6 +18,7 @@ public class Player{
 
         }
     }
+    //shows all previous songs played
     public void showHistory() {
         System.out.println("History:");
         for (Song song : history) {

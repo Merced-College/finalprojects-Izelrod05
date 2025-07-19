@@ -103,7 +103,7 @@ public class Main{
                     String genre = scanner.nextLine();
                     System.out.print("How many recommendations? ");
                     int count = scanner.nextInt();
-                    scanner.nextLine(); // consume newline
+                    scanner.nextLine(); //  newline
                     GenreRecommend.recommend(allSongs, genre, count);
                 }
                 case 8 -> {
