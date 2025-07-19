@@ -51,19 +51,25 @@ public class Main{
             scanner.nextLine(); // consume newline
 
             switch (choice) {
-                case 1 -> {
-                    System.out.print("Enter song title: ");
-                    String title = scanner.nextLine();
-                    System.out.print("Enter artist: ");
-                    String artist = scanner.nextLine();
-                    System.out.print("Enter genre: ");
-                    String genre = scanner.nextLine();
 
-                    Song newSong = new Song(title, artist, genre);
-                    library.addSong(newSong);
-                    allSongs.add(newSong);
-                    System.out.println("Song added to library.");
+                case 1 -> {
+                    try{
+                     System.out.print("Enter song title: ");
+                     String title = scanner.nextLine();
+                     System.out.print("Enter artist: ");
+                     String artist = scanner.nextLine();
+                     System.out.print("Enter genre: ");
+                     String genre = scanner.nextLine();
+
+                     Song newSong = new Song(title, artist, genre);
+                     library.addSong(newSong);
+                     allSongs.add(newSong);
+                     System.out.println("Song added to library.");
+                   }catch (IllegalArgumentException e) {
+                     System.out.println("Error: " + e.getMessage());
+                  }
                 }
+                
                 case 2 -> {
                     System.out.println("--- All Songs in Library ---");
                     library.showAllSongs();
